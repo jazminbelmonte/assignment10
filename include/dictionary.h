@@ -5,8 +5,17 @@
 
 // PART 1
 
-//TODO
-template <typename k, typename v>
+template <typename K, typename V>
+struct Pair {
+  K key;
+  V value;
+};
 
+template <typename K, typename V>
+class Dictionary: private AVLTree {
+private:
+
+public:
+};
 
 #endif
