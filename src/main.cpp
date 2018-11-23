@@ -1,7 +1,7 @@
 #include <iostream>
 #include "dictionary.h"
 #include <vector>
-using namespace std);
+using namespace std;
 
 //PART 2
 int main(){
@@ -14,12 +14,14 @@ int main(){
   statesUSA.put("AL", "Alabama");
   statesUSA.put("AK", "Alaska");
   statesUSA.put("AZ", "Arizona");
+  statesUSA.put("AR", "Arkansas");
   statesUSA.put("CA", "California");
   statesUSA.put("CO", "Colorado");
   statesUSA.put("CT", "Connecticut");
   statesUSA.put("DE", "Delaware");
   statesUSA.put("FL", "Florida");
   statesUSA.put("GA", "Georgia");
+
   statesUSA.put("HI", "Hawaii");
   statesUSA.put("ID", "Idaho");
   statesUSA.put("IL", "Illinois");
@@ -27,9 +29,10 @@ int main(){
   statesUSA.put("IA", "Iowa");
   statesUSA.put("KS", "Kansas");
   statesUSA.put("KY", "Kentucky");
-  statesUSA.put("LA", "louisiana");
+  statesUSA.put("LA", "Louisiana");
   statesUSA.put("ME", "Maine");
   statesUSA.put("MD", "Maryland");
+
   statesUSA.put("MA", "Massachusetts");
   statesUSA.put("MI", "Michigan");
   statesUSA.put("MN", "Minnesota");
@@ -40,6 +43,7 @@ int main(){
   statesUSA.put("NV", "Nevada");
   statesUSA.put("NH", "New Hampshire");
   statesUSA.put("NJ", "New Jersey");
+
   statesUSA.put("NM", "New Mexico");
   statesUSA.put("NY", "New York");
   statesUSA.put("NC", "North Carolina");
@@ -50,6 +54,7 @@ int main(){
   statesUSA.put("PA", "Pennsylvania");
   statesUSA.put("RI", "Rhode Island");
   statesUSA.put("SC", "South Carolina");
+
   statesUSA.put("SD", "South Dakota");
   statesUSA.put("TN", "Tennessee");
   statesUSA.put("TX", "Texas");
@@ -60,6 +65,28 @@ int main(){
   statesUSA.put("WV", "West Virginia");
   statesUSA.put("WI", "Wisconsin");
   statesUSA.put("WY", "Wyoming");
-  
+
+  /* for testing purposes
+
+  std::vector keysVector = statesUSA.keys();
+  for (int i = 0; i < keysVector.size(); i++){
+    cout << keysVector[i] << " ";
+  }
+  cout << endl << endl;
+  std::vector valuesVector = statesUSA.values();
+  for (int i = 0; i < valuesVector.size(); i++){
+    cout << valuesVector[i] << " ";
+  }
+
+
+  cout << endl << statesUSA.empty() << endl;
+  cout << statesUSA.size() << endl;
+  statesUSA.remove("TX");
+  cout << statesUSA.size() << endl;
+  cout << statesUSA.get("NY") << endl;
+  */
+
+
+
   return 0;
 }
