@@ -9,57 +9,79 @@ template <typename K, typename V>
 struct Pair {
   K key;
   V value;
-  Pair<K,V>*;
+
+  bool operator == (Pair& p) const{ return key == p.key; }
+  bool operator != (Pair& p) const{ return key != p.key; }
+  bool operator < (Pair& p) const{ return key < p.key; }
+  bool operator > (Pair& p) const{ return key > p.key; }
+  bool operator <= (Pair& p) const{ return key <= p.key; }
+  bool operator >= (Pair& p) const{ return key >= p.key; }
 };
 
 template <typename K, typename V>
-class Dictionary: private AVLTree {
+class Dictionary: private AVLTree<Pair<K,V>> {
+protected:
+  int count = 0;
 
 public:
-  //returns true if the dictionary is empty
-  bool empty const()​​{
-    AVLTree::empty();
+
+  bool empty(){
+    return AVLTree<Pair<K,V>>::empty();
   }
 
-  //returns the number of pairs in the dictionary
-  int size()​​ const {
-    AVLTree::size();
+  int size(){
+    return AVLTree<Pair<K,V>>::size();
   }
 
-  //returns a pointer to the value associated with key or null otherwise
-  V* get(K key)​​ const{
-    AVLTree::search(K key);
+  V* get(K key){ ;
+    return search(key)->info.value;
   }
 
-  //inserts the pair of key and value into the dictionary if it does not exist
-  //or change the value of the pair with key to value???
-  void put(K key, V value)​​{
-    if (AVLTree::search(K key) == nullptr) {
-      insert(Pair<key, value>);
+  void put(K key, V value){
+    auto newPair = new Pair<K,V>(key, value);
+    if (search(key) == nullptr) {
+      insert(newPair);
     }
   }
 
-  //removes the pair with key from the dictionary
-  void remove(K key)​​{
-    AVLTree::remove(K key);
+  void remove(K key){
+    if (search(key) == nullptr){
+      return;
+    }
+    V value = *search(key);
+    auto temporary = new Pair<K,V>(key, value);
+    AVLTree<Pair<K,V>>::remove(temporary);
   }
 
-  //remove all the pairs from the dictionary
-  void clear()​​{
-    AVLTree::~AVLTree();
+  void clear(){
+    AVLTree<Pair<K,V>>::destroy();
   }
 
-  //returns a vector of all the keys in the dictionary in no particular order
-  std::vector<K> keys()​​{
-    //creating vector of keys
-    std::vector<K> keyVector(size());
+  std::vector<K> keys(){
+
+    std::vector<K> keyVector;
   }
 
-  //returns a vector of all the values in the dictionary in no particular order.
-  std::vector<V> values()​​{
-    //creating vector of values
-    std::vector<V> valuesVector(size());
+  std::vector<V> values(){
+    Pair<K, V> root = AVLTree<Pair<K, V>>::root;
+    std::vector<V> valuesVector;
+
   }
+
 };
 
 #endif
+
+//dictionary is an avl tree of pairs
+//create a pair <k,v> data struct
+
+//info is now a pair
+//inside AVL tree we have T e, search is e == another info
+//implement operator ==
+//implement operator !=
+//implement operator <
+//implement operator >
+//implement operator >=
+//implement operator <=
+//only compare pair.key to pair2.key
+//two pairs are the same if their keys are the same
