@@ -6,9 +6,11 @@
 
 TEST_CASE("Dictionary test with int key and string value") {
   Dictionary<int, std::string> BestPicture;
+
   //make sure we have a clean tree
   CHECK(BestPicture.empty() == 1);
 
+  //put some keys and values in the dictionary
   BestPicture.put(2018, "The Shape of Water");
   BestPicture.put(2017, "Moonlight");
   BestPicture.put(2016, "Spotlight");
@@ -20,31 +22,34 @@ TEST_CASE("Dictionary test with int key and string value") {
   BestPicture.put(2010, "The Hurt Locker");
   BestPicture.put(2009, "Slumdog Millionaire");
 
-  //check if all inputs worked
+  //check if all inputs worked and the tree is no longer empty
   CHECK(BestPicture.empty() == 0);
   CHECK(BestPicture.size() == 10);
 
-  //get winners
+  //get winner
   CHECK(BestPicture.get(2012) == "The Artist");
+  //get winner for a non-existent key
   CHECK_THROWS(BestPicture.get(2004));
 
-  //duplicate
+  //try to input a duplicate key
   BestPicture.put(2017, "La La Land");
   CHECK(BestPicture.size() == 10);
 
-  //vector
+  //test vectors
   std::vector keysVector = BestPicture.keys();
-  CHECK(keysVector.size() == 10);
   std::vector valuesVector = BestPicture.values();
+  //make sure all the values are in the vectors by checking sizes of both
+  CHECK(keysVector.size() == 10);
   CHECK(valuesVector.size() == 10);
 
-  //remove
+  //test remove
   BestPicture.remove(2013);
   CHECK(BestPicture.size() == 9);
+  //test removing a non-existent key
   BestPicture.remove(1992);
   CHECK(BestPicture.size() == 9);
 
-  //clear
+  //test clear
   BestPicture.clear();
   CHECK(BestPicture.empty() == 1);
 }
@@ -52,9 +57,11 @@ TEST_CASE("Dictionary test with int key and string value") {
 
 TEST_CASE("Dictionary test with string key and double value") {
   Dictionary<std::string, double> blackFridayShopping;
+
   //make sure we have a clean tree
   CHECK(blackFridayShopping.empty() == 1);
 
+  //put some keys and values in the dictionary
   blackFridayShopping.put("iPad Pro", 249);
   blackFridayShopping.put("Nintendo Switch", 299.99);
   blackFridayShopping.put("AirPods", 160);
@@ -66,31 +73,34 @@ TEST_CASE("Dictionary test with string key and double value") {
   blackFridayShopping.put("Beats Wireless", 180);
   blackFridayShopping.put("Amazon Echo", 24);
 
-  //check if all inputs worked
+  //check if all inputs worked and the tree is no longer empty
   CHECK(blackFridayShopping.empty() == 0);
   CHECK(blackFridayShopping.size() == 10);
 
-  //get prices
+  //get price
   CHECK(blackFridayShopping.get("Xbox") == 429.99);
+  //get price for non-existent key
   CHECK_THROWS(blackFridayShopping.get("Sony TV"));
 
-  //duplicate
+  //try to input a duplicate key
   blackFridayShopping.put("Amazon Echo", 99999.99);
   CHECK(blackFridayShopping.size() == 10);
 
-  //vector
+  //test vectors
   std::vector keysVector = blackFridayShopping.keys();
-  CHECK(keysVector.size() == 10);
   std::vector valuesVector = blackFridayShopping.values();
+  //make sure all the values are in the vectors by checking sizes of both
+  CHECK(keysVector.size() == 10);
   CHECK(valuesVector.size() == 10);
 
-  //remove
+  //test remove
   blackFridayShopping.remove("iPad Pro");
   CHECK(blackFridayShopping.size() == 9);
+  //test removing a non-existent key
   blackFridayShopping.remove("Apple Watch");
   CHECK(blackFridayShopping.size() == 9);
 
-  //clear
+  //test clear
   blackFridayShopping.clear();
   CHECK(blackFridayShopping.empty() == 1);
 }

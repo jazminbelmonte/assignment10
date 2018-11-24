@@ -29,7 +29,9 @@ public:
 
   int height(const Node<T> *node) const { return node ? node->height : 0; }
 
-  int size() const { return size(root); }
+  int size() const {
+    return size(root);
+  }
   int size(const Node<T>* node) const {
     return node ? 1 + size(node->llink) + size(node->rlink) : 0;
   }
@@ -109,8 +111,8 @@ public:
   }
 
   void double_right_rotate(Node<T>* &node3){
-    single_right_rotate(node3->rlink);
-    single_left_rotate( node3 );
+    single_left_rotate(node3->rlink);
+    single_right_rotate( node3 );
   }
 
   void balance( Node<T>* &node ) {

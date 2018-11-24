@@ -66,9 +66,9 @@ int main(){
   statesUSA.put("WI", "Wisconsin");
   statesUSA.put("WY", "Wyoming");
 
-  /* for testing purposes
+  /*        for testing purposes
 
-  std::vector keysVector = statesUSA.keys();
+   std::vector keysVector = statesUSA.keys();
   for (int i = 0; i < keysVector.size(); i++){
     cout << keysVector[i] << " ";
   }
@@ -78,14 +78,12 @@ int main(){
     cout << valuesVector[i] << " ";
   }
 
-
   cout << endl << statesUSA.empty() << endl;
   cout << statesUSA.size() << endl;
   statesUSA.remove("TX");
   cout << statesUSA.size() << endl;
   cout << statesUSA.get("NY") << endl;
-  */
-
+   */
 
 
   return 0;
