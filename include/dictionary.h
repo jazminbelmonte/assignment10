@@ -1,6 +1,7 @@
 #ifndef _DICTIONARY_H_
 #define _DICTIONARY_H_
 #include <vector>
+#include <stdexcept>
 #include "avl_tree.h"
 
 // PART 1
@@ -21,10 +22,17 @@ struct Pair {
 template <typename K, typename V>
 class Dictionary: private AVLTree<Pair<K,V>> {
 protected:
-  int count = 0;
+  std::vector<Pair<K,V>> keyValueVector;
+
+  void makeVector(Node<Pair<K,V>>* node){
+    if (node){
+      keyValueVector.push_back(node->info);
+      makeVector(node->llink);
+      makeVector(node->rlink);
+    }
+  }
 
 public:
-
   bool empty(){
     return AVLTree<Pair<K,V>>::empty();
   }
@@ -33,55 +41,60 @@ public:
     return AVLTree<Pair<K,V>>::size();
   }
 
-  V* get(K key){ ;
-    return search(key)->info.value;
+  V get(K key){
+    if (this->search(Pair<K,V>{key}) == nullptr){
+      throw std::runtime_error("That key does not exist");
+    }
+    return this->search(Pair<K,V>{key})->info.value;
   }
 
   void put(K key, V value){
-    auto newPair = new Pair<K,V>(key, value);
-    if (search(key) == nullptr) {
-      insert(newPair);
+    if (this->search(Pair<K,V>{key})){
+      return;
     }
+    this->insert(Pair<K,V>{key,value},this->root);
   }
 
   void remove(K key){
-    if (search(key) == nullptr){
+    if (this->search(Pair<K,V>{key}) == nullptr){
       return;
     }
-    V value = *search(key);
-    auto temporary = new Pair<K,V>(key, value);
+    V value = this->search(Pair<K,V>{key})->info.value;
+    auto temporary = Pair<K,V>{key,value};
     AVLTree<Pair<K,V>>::remove(temporary);
   }
 
   void clear(){
-    AVLTree<Pair<K,V>>::destroy();
+    this->destroy(this->root);
   }
 
   std::vector<K> keys(){
-
+    keyValueVector.clear();
     std::vector<K> keyVector;
+
+    makeVector(this->root);
+
+    for(Pair<K,V> info: keyValueVector){
+      keyVector.push_back(info.key);
+    }
+
+    return keyVector;
   }
 
   std::vector<V> values(){
-    Pair<K, V> root = AVLTree<Pair<K, V>>::root;
+    keyValueVector.clear();
+    auto root = this->root;
     std::vector<V> valuesVector;
 
+    makeVector(this->root);
+
+    for(Pair<K,V> info: keyValueVector){
+      valuesVector.push_back(info.value);
+    }
+
+    return valuesVector;
   }
 
 };
 
 #endif
-
-//dictionary is an avl tree of pairs
-//create a pair <k,v> data struct
-
-//info is now a pair
-//inside AVL tree we have T e, search is e == another info
-//implement operator ==
-//implement operator !=
-//implement operator <
-//implement operator >
-//implement operator >=
-//implement operator <=
-//only compare pair.key to pair2.key
-//two pairs are the same if their keys are the same
